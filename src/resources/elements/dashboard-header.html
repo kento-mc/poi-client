@@ -1,0 +1,25 @@
+<template>
+  <div class="ui segment">
+    <div class="ui grid">
+      {{#if user.isAdmin}}
+      <h1 class="ten wide column">
+        {{user.firstName}} {{user.lastName}}'s Admin Dashboard
+      </h1>
+      {{else}}
+      <h1 class="six wide column">
+        {{user.firstName}} {{user.lastName}}'s Dashboard
+      </h1>
+      {{/if}}
+      {{#if user.isAdmin}}
+      <aside class="six wide column">
+      </aside>
+      {{else}}
+      <aside class="ten wide column">
+        <h1>
+          POIs : {{user.contributedPOIs}}
+        </h1>
+      </aside>
+      {{/if}}
+    </div>
+  </div>
+</template>

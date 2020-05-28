@@ -1,0 +1,17 @@
+<template>
+  <require from="../resources/elements/dashboard-header"></require>
+  <require from="../resources/elements/add-poi-form"></require>
+  <require from="../resources/elements/poi-list"></require>
+
+  <div class="ui stackable grid">
+    <div class="sixteen wide column">
+      <dashboard-header></dashboard-header>
+    </div>
+    <div class="six wide column">
+      <add-poi-form></add-poi-form>
+    </div>
+    <div class="ten wide column">
+      <poi-list pois.bind="pois"> </poi-list>
+    </div>
+  </div>
+</template>
