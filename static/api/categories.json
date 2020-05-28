@@ -1,0 +1,22 @@
+[
+  {
+  "name": "Dining",
+  "description": "A place to dine",
+  "contributor": "user"
+  },
+  {
+  "name": "Park",
+  "description": "A place to sit",
+  "contributor": "user"
+  },
+  {
+  "name": "Walk",
+  "description": "A place to walk",
+  "contributor": "user"
+  },
+  {
+  "name": "Historic Site",
+  "description": "A place to reminisce",
+  "contributor": "user"
+  }
+]

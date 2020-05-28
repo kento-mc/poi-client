@@ -1,4 +1,6 @@
 <template>
+  <require from="./category-list"></require>
+
   <div class="ui stacked segment">
     <form submit.trigger="submitPOI()" class="ui form stacked segment" enctype="multipart/form-data">
       <h3 class="ui header">Add a new Point of Interest</h3>
@@ -17,7 +19,11 @@
       <div class="field">
         <label class="field">Categories</label>
         <select class="ui fluid dropdown" name="categories" multiple="" >
-          {{> categories }}
+          <option value="">categories</option>
+          <option value="dining">Dining</option>
+          <option value="park">Park</option>
+          <option value="walk">Walk</option>
+          <option value="historic">Historic Site</option>
         </select>
       </div>
       <!-- Used the following to work out the filename display functionality:

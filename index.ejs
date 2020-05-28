@@ -11,5 +11,10 @@
     <!-- imported CSS are concatenated and added automatically -->
   </head>
   <body aurelia-app="main">
+    <script>
+      $(document).ready(function () {
+        $('.ui.dropdown').dropdown({ on: 'hover' });
+      });
+    </script>
   </body>
 </html>

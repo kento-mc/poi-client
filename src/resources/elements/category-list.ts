@@ -3,7 +3,7 @@ import { POI, Category } from '../../services/poi-types';
 import {PoiService} from "../../services/poi-service";
 
 @inject(PoiService)
-export class PoiList {
+export class CategoryList {
   @bindable
   pois: POI[];
   @bindable
