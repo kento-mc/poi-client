@@ -4,8 +4,4 @@ import {PoiService} from "../../services/poi-service";
 
 @inject(PoiService)
 export class CategoryList {
-  @bindable
-  pois: POI[];
-  @bindable
-  categories: Category[];
 }

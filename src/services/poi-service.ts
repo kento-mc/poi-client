@@ -8,7 +8,7 @@ import {RawPOI, POI, Category} from "./poi-types";
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class PoiService {
   pois: POI[] = [];
-  categories: Category[] = []
+  categories: Category[] = [];
 
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
     httpClient.configure(http => {
@@ -17,14 +17,14 @@ export class PoiService {
     this.getCategories();
   }
 
-  addPOI(name: string, description: string, lat: number, lon: number, categories: string[],
+  addPOI(name: string, description: string, lat: number, lon: number, selectedCategories: string[],
            imageURL: string[], contributor: string) {
     const poi = {
       name: name,
       description: description,
       lat: lat,
       lon: lon,
-      categories: categories,
+      categories: selectedCategories,
       imageURL: imageURL,
       thumbnailURL: imageURL[0],
       contributor: contributor

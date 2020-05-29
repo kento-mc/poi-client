@@ -23,11 +23,11 @@
             <div>Lon: ${poi.lon}</div>
           </td>
           <td>
-            <div repeat.for="category of categories">
-              ${category.name}
+            <div repeat.for="category of poi.categories">
+              ${category}
             </div>
           </td>
-          <td> {{contributor.firstName}} {{contributor.lastName}} </td>
+          <td> ${poi.contributor} </td>
           <td>
             <a href={{thumbnailURL}}>
               <img alt="poi thumbnail" src={{thumbnailURL}} width="150" height="70">

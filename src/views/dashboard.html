@@ -8,10 +8,10 @@
       <dashboard-header></dashboard-header>
     </div>
     <div class="six wide column">
-      <add-poi-form></add-poi-form>
+      <add-poi-form categories.bind="categories"></add-poi-form>
     </div>
     <div class="ten wide column">
-      <poi-list pois.bind="pois"> categories.bind="categories" </poi-list>
+      <poi-list pois.bind="pois" categories.bind="categories"></poi-list>
     </div>
   </div>
 </template>
