@@ -7,18 +7,28 @@ export class AddPoiForm {
   //@bindable
   //categories: Category[];
   cats = ['one', 'two', 'three'];
+  selectedImage: any;
+  imageInfo: any;
 
   name: string;
   description: string;
   lat: number;
   lon: number;
   selectedCategories: string[];
-  imageURL: string[] = ['url1'];
+  image: any;
+  imageURL: string[] = [];
   contributor: string = 'user';
 
   constructor(private ps: PoiService) {}
 
-  submitPOI () {
+  getImage(event) {
+    this.selectedImage = event.target.files[0];
+    console.log(this.selectedImage);
+  }
+
+  async submitPOI () {
+    this.imageInfo = await this.ps.uploadImage(this.selectedImage);
+    this.imageURL.push(this.imageInfo.url);
     this.ps.addPOI(this.name, this.description, this.lat, this.lon, this.selectedCategories, this.imageURL, this.contributor);
   }
 }
