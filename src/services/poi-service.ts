@@ -38,14 +38,19 @@ export class PoiService {
 
   async addPOI(name: string, description: string, lat: number, lon: number, selectedCategories: string[],
            imageURL: string[], contributor: string) {
+    const user = 'tempUser';
 
     const poiPayload = {
       name: name,
       description: description,
-      lat: lat,
-      lon: lon,
+      location: {
+        lat: lat,
+        lon: lon
+      },
       categories: selectedCategories,
-      image: imageURL
+      imageURL: imageURL,
+      thumbnailURL: imageURL[0],
+      contributor: user
     }
 
     const poi = {
