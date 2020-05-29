@@ -1,3 +1,33 @@
+import { RouterConfiguration, Router } from 'aurelia-router';
+import { PLATFORM } from 'aurelia-pal';
+
 export class App {
-  public message: string = 'Hello World!';
+  router: Router;
+
+  configureRouter(config: RouterConfiguration, router: Router) {
+    config.map([
+      {
+        route: ['', 'dashboard'],
+        name: 'Dashboard',
+        moduleId: PLATFORM.moduleName('views/dashboard'),
+        nav: true,
+        title: 'Dashboard'
+      },
+      {
+        route: 'pois',
+        name: 'POIs',
+        moduleId: PLATFORM.moduleName('views/pois'),
+        nav: true,
+        title: 'POIs'
+      },
+      {
+        route: 'settings',
+        name: 'Settings',
+        moduleId: PLATFORM.moduleName('views/settings'),
+        nav: true,
+        title: 'Settings'
+      }
+    ]);
+    this.router = router;
+  }
 }
