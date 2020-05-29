@@ -25,7 +25,6 @@ export interface Category {
   name: string,
   description: string,
   contributor: string,
-  _id: string
 }
 
 export interface User {
