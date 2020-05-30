@@ -6,6 +6,7 @@ import { PoiService } from '../services/poi-service';
 export class Poi {
   pois: POI[];
   categories: Category[];
+  id: string;
 
   constructor(private ps: PoiService) {
     this.pois = ps.pois;
@@ -13,6 +14,6 @@ export class Poi {
   }
 
   canActivate(params) {
-    console.log(params);
+    this.id = params.id;
   }
 }

@@ -20,6 +20,8 @@ export class AddPoiForm {
 
   constructor(private ps: PoiService) {}
 
+  activate() {} //TODO use to inject script?
+
   getImage(event) {
     this.selectedImage = event.target.files[0];
     this.imageName = this.selectedImage.name;

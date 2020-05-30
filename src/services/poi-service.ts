@@ -5,10 +5,6 @@ import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { RawPOI, POI, Category } from "./poi-types";
 
-// Cloudinary config
-//const cloudinary = require('cloudinary').v2;
-//const cl = new cloudinary.Cloudinary({cloud_name: "dwgak0rbs"});
-
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class PoiService {
   pois: POI[] = [];
@@ -18,12 +14,13 @@ export class PoiService {
     httpClient.configure(http => {
       http.withBaseUrl('http://localhost:8080');
     });
+    this.getPOIs();
     this.getCategories();
   }
 
   async uploadImage(file) {
     const cloudClient = new HttpClient();
-    cloudClient.configure( http => {
+    cloudClient.configure(http => {
       http.withBaseUrl('https://api.cloudinary.com/v1_1/dwgak0rbs');
     });
     const imageFile = file;
@@ -37,7 +34,7 @@ export class PoiService {
   }
 
   async addPOI(name: string, description: string, lat: number, lon: number, selectedCategories: string[],
-           imageURL: string[], contributor: string) {
+               imageURL: string[], contributor: string) {
     const user = 'tempUser';
 
     const poiPayload = {
@@ -53,11 +50,13 @@ export class PoiService {
       contributor: user
     }
 
-    const poi = {
+    const poi: POI = {
       name: name,
       description: description,
-      lat: lat,
-      lon: lon,
+      location: {
+        lat: lat,
+        lon: lon,
+      },
       categories: selectedCategories,
       imageURL: imageURL,
       thumbnailURL: imageURL[0],
@@ -65,6 +64,20 @@ export class PoiService {
     }
 
     this.pois.push(poi);
+  }
+
+  getPoiByName(name: string) { //TODO refactor for DB
+    for (let poi of this.pois) {
+      if (poi.name == name) {
+        return poi;
+      }
+    }
+  }
+
+  async getPOIs() {
+    const response = await this.httpClient.get('/api/pois.json');
+    this.pois = await response.content;
+    console.log(this.pois);
   }
 
   async getCategories() {

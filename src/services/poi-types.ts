@@ -1,8 +1,10 @@
 export interface RawPOI {
   name: string,
   description: string,
-  lat: number,
-  lon: number,
+  location: {
+    lat: number,
+    lon: number
+  },
   categories: string[],
   imageURL: string[],
   thumbnailURL: string,
@@ -13,8 +15,10 @@ export interface RawPOI {
 export interface POI {
   name: string,
   description: string,
-  lat: number,
-  lon: number,
+  location: {
+    lat: number,
+    lon: number,
+  }
   categories: string[],
   imageURL: string[],
   thumbnailURL: string,
