@@ -21,6 +21,13 @@ export class App {
         title: 'POIs'
       },
       {
+        route: 'pois/:id',
+        name: 'poi',
+        moduleId: PLATFORM.moduleName('views/poi'),
+        nav: false,
+        title: 'POI'
+      },
+      {
         route: 'settings',
         name: 'Settings',
         moduleId: PLATFORM.moduleName('views/settings'),

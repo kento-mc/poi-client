@@ -18,11 +18,9 @@
       </div>
       <div class="field">
         <label class="field">Categories</label>
-        <select class="ui fluid dropdown" multiple value.bind="selectedCategories">
+        <select change.trigger="logChange($event)" class="ui fluid dropdown" id="multiCat" multiple value.bind="selectedCategories">
           <option value="">categories</option>
-          <option repeat.for="cat of cats"
-                  model.bind="cat"
-                  value=${cat}>
+          <option id="repeatOption" repeat.for="cat of categories" value.bind="cat" value=${cat}>
             ${cat}
           </option>
           <!--
@@ -34,9 +32,6 @@
           -->
         </select>
       </div>
-      <!-- Used the following to work out the filename display functionality:
-      https://stackoverflow.com/questions/41542845/how-to-display-file-name-for-custom-styled-input-file-using-jquery
-      -->
       <div>
         <label for="file-upload" class="ui blue button">
           <i class="image icon"></i>
@@ -44,7 +39,10 @@
         </label>
         <input change.trigger="getImage($event)" id="file-upload" type="file" name="image" style="display:none">
       </div>
-      <br>
+      <div show.bind="imageName"  class="field" id="upload-preview">
+        <input placeholder=${imageName} readonly>
+      </div>
+      <br hide.bind="imageName">
       <button class="ui blue submit button">Submit</button>
     </form>
   </div>

@@ -15,7 +15,9 @@
         <tr repeat.for="poi of pois">
           <td>
             <div>${poi.name}</div>
-            <a href="/poi/{{_id}}">view</a>
+            <a route-href="route: poi; params.bind: { id: poi.name }">
+              view
+            </a>
           </td>
           <td> ${poi.description} </td>
           <td>
