@@ -14,12 +14,13 @@ export class PoiService {
     httpClient.configure(http => {
       http.withBaseUrl('http://localhost:8080');
     });
+    this.getPOIs();
     this.getCategories();
   }
 
   async uploadImage(file) {
     const cloudClient = new HttpClient();
-    cloudClient.configure( http => {
+    cloudClient.configure(http => {
       http.withBaseUrl('https://api.cloudinary.com/v1_1/dwgak0rbs');
     });
     const imageFile = file;
@@ -33,7 +34,7 @@ export class PoiService {
   }
 
   async addPOI(name: string, description: string, lat: number, lon: number, selectedCategories: string[],
-           imageURL: string[], contributor: string) {
+               imageURL: string[], contributor: string) {
     const user = 'tempUser';
 
     const poiPayload = {
@@ -49,7 +50,7 @@ export class PoiService {
       contributor: user
     }
 
-    const poi = {
+    const poi: POI = {
       name: name,
       description: description,
       location: {
@@ -72,6 +73,13 @@ export class PoiService {
       }
     }
   }
+
+  async getPOIs() {
+    const response = await this.httpClient.get('/api/pois.json');
+    this.pois = await response.content;
+    console.log(this.pois);
+  }
+
   async getCategories() {
     const response = await this.httpClient.get('/api/categories.json');
     this.categories = await response.content;
