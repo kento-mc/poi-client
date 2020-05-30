@@ -14,8 +14,6 @@ export class Poi {
   }
 
   canActivate(params) {
-    console.log(params);
     this.id = params.id;
-    console.log(this.id);
   }
 }

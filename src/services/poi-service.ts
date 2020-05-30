@@ -5,10 +5,6 @@ import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { RawPOI, POI, Category } from "./poi-types";
 
-// Cloudinary config
-//const cloudinary = require('cloudinary').v2;
-//const cl = new cloudinary.Cloudinary({cloud_name: "dwgak0rbs"});
-
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class PoiService {
   pois: POI[] = [];
@@ -56,8 +52,10 @@ export class PoiService {
     const poi = {
       name: name,
       description: description,
-      lat: lat,
-      lon: lon,
+      location: {
+        lat: lat,
+        lon: lon,
+      },
       categories: selectedCategories,
       imageURL: imageURL,
       thumbnailURL: imageURL[0],
