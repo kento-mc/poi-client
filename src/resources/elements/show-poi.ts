@@ -8,4 +8,22 @@ export class ShowPoi {
   pois: POI[];
   @bindable
   categories: Category[];
+  @bindable
+  id: string;
+  poi: POI;
+
+  constructor(private ps: PoiService) {
+  }
+
+  attached() {
+    this.getPoiByName(this.id);
+  }
+
+/*  canActivate(params) {
+    console.log(params);
+  }*/
+
+  getPoiByName(name: string) {
+    this.poi = this.ps.getPoiByName(name);
+  }
 }

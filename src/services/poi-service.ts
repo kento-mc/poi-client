@@ -67,6 +67,13 @@ export class PoiService {
     this.pois.push(poi);
   }
 
+  getPoiByName(name: string) { //TODO refactor for DB
+    for (let poi of this.pois) {
+      if (poi.name == name) {
+        return poi;
+      }
+    }
+  }
   async getCategories() {
     const response = await this.httpClient.get('/api/categories.json');
     this.categories = await response.content;
