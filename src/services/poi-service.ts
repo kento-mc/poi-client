@@ -53,7 +53,6 @@ export class PoiService {
     }
 
     const response = await this.httpClient.post('/api/pois', poi);
-    console.log(response);
     this.loggedInUser.contributedPOIs++;
     this.pois.push(poi);
   }
