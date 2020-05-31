@@ -36,7 +36,6 @@ export class AddPoiForm {
     this.imageName = '';
     this.imageInfo = await this.ps.uploadImage(this.selectedImage);
     this.imageURL.push(this.imageInfo.url);
-    //const catIds = await this.ps.getCategoryIds(this.selectedCategories);
     console.log(this.selectedCategories);
     await this.ps.addPOI(this.name, this.description, this.lat, this.lon, this.selectedCategories, this.imageURL);
     this.resetForm();

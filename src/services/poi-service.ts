@@ -96,18 +96,6 @@ export class PoiService {
     console.log(this.categories);
   }
 
-  async getCategoryIds(catNames: string[]) {
-    const catIds: string[] = [];
-    this.userCategories.forEach(cat => {
-      for (let name of catNames) {
-        if (cat.name === name) {
-          catIds.push(cat._id);
-        }
-      }
-    });
-    return catIds;
-  }
-
   async getUserCategories() {
     const userCats: Category[] = [];
     this.categories.forEach(cat => {
