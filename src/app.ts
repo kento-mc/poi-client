@@ -25,7 +25,7 @@ export class App {
         name: 'poi',
         moduleId: PLATFORM.moduleName('views/poi'),
         nav: false,
-        title: 'POI'
+        title: 'POIs'
       },
       {
         route: 'settings',
@@ -33,6 +33,13 @@ export class App {
         moduleId: PLATFORM.moduleName('views/settings'),
         nav: true,
         title: 'Settings'
+      },
+      {
+        route: 'logout',
+        name: 'logout',
+        moduleId: PLATFORM.moduleName('views/logout'),
+        nav: true,
+        title: 'Logout'
       }
     ]);
     this.router = router;
