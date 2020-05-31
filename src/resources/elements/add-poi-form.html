@@ -1,5 +1,8 @@
 <template>
   <require from="./category-list"></require>
+  <require from="./script-injector"></require>
+
+  <scriptinjector></scriptinjector>
 
   <div class="ui stacked segment">
     <form submit.trigger="submitPOI()" class="ui form stacked segment" enctype="multipart/form-data">
@@ -18,7 +21,7 @@
       </div>
       <div class="field">
         <label class="field">Categories</label>
-        <select change.trigger="logChange($event)" class="ui fluid dropdown" id="multiCat" multiple value.bind="selectedCategories">
+        <select change.trigger="logChange($event)" class="ui dropdown" multiple value.bind="selectedCategories">
           <option value="">categories</option>
           <option id="repeatOption" repeat.for="cat of categories" value.bind="cat" value=${cat}>
             ${cat}
