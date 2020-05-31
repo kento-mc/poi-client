@@ -29,6 +29,7 @@ export interface Category {
   name: string,
   description: string,
   contributor: string,
+  _id: string
 }
 
 export interface RawUser {
@@ -52,4 +53,5 @@ export interface User {
   isAdmin: boolean,
   customCategories: number,
   contributedPOIs: number,
+  _id: string
 }
