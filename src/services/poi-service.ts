@@ -10,6 +10,7 @@ export class PoiService {
   users: Map<string, User> = new Map();
   loggedInUser: User;
   pois: POI[] = [];
+  poisExtended: any[] =[];
   categories: Category[] = [];
   userCategories: Category[] = [];
 
@@ -55,6 +56,7 @@ export class PoiService {
     const response = await this.httpClient.post('/api/pois', poi);
     this.loggedInUser.contributedPOIs++;
     this.pois.push(poi);
+    this.populatePoisExtended();
   }
 
   getPoiByName(name: string) { //TODO refactor for DB
@@ -89,10 +91,36 @@ export class PoiService {
     }
   }
 
+  async populatePoisExtended() {
+    this.poisExtended = [...this.pois];
+    let cat: Category;
+    for (let poi of this.poisExtended) {
+      const response = await this.httpClient.get('/api/users/' + poi.contributor);
+      poi.contributorName = response.content.fullName;
+
+      let poiCats: string[] = [];
+      for (let catId of poi.categories) {
+        cat = this.getCategoryById(catId);
+        poiCats.push(cat.name);
+      }
+      poi.categoryNames = poiCats;
+    }
+  }
+
   async getCategories() {
     const response = await this.httpClient.get('/api/categories');
     this.categories = await response.content;
     console.log(this.categories);
+  }
+
+  getCategoryById(id: string) {
+    let category: Category;
+    this.categories.forEach(cat => {
+      if (cat._id === id) {
+        category = cat;
+      }
+    });
+    return category;
   }
 
   async getUserCategories() {
@@ -114,7 +142,8 @@ export class PoiService {
     const user = this.users.get(email);
     if (user && (user.password === password)) {
       this.loggedInUser = user;
-      this.getUserCategories();
+      this.getUserCategories(); //TODO refactor to use api
+      await this.populatePoisExtended();
       this.changeRouter(PLATFORM.moduleName('app'))
       return true;
     } else {

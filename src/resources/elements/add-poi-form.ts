@@ -32,7 +32,7 @@ export class AddPoiForm {
     console.log(this.selectedImage);
   }
 
-  async submitPOI () {
+  async submitPOI() {
     this.imageName = '';
     this.imageInfo = await this.ps.uploadImage(this.selectedImage);
     this.imageURL.push(this.imageInfo.url);
@@ -51,9 +51,5 @@ export class AddPoiForm {
     this.selectedCategories = [];
     this.imageURL = [];
       // new Redirect() //TODO try this
-  }
-
-  logChange(event) {
-    console.log(event);
   }
 }

@@ -5,8 +5,10 @@ import { PoiService } from '../services/poi-service';
 @inject(PoiService)
 export class Pois {
   pois: POI[];
+  poisextended: any[];
 
   constructor(private ps: PoiService) {
     this.pois = ps.pois;
+    this.poisextended = ps.poisExtended;
   }
 }

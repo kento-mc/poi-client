@@ -9,5 +9,7 @@ export class PoiList {
   @bindable
   pois: POI[];
   @bindable
+  poisextended: any[];
+  @bindable
   categories: Category[];
 }
