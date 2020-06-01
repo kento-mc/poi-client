@@ -21,14 +21,14 @@ export class ShowPoi {
 
   async attached() {
     await this.getPoiById(this.id);
-    await this.isEditable(this.poi, this.user)
+    this.isEditable(this.poi, this.user)
   }
 
   async getPoiById(id: string) {
     this.poi = await this.ps.getPoiById(id)
   }
 
-  async isEditable(poi: POI, user: User) {
+  isEditable(poi: POI, user: User) {
     if (user._id === poi.contributor._id || user.isAdmin) {
       this.editable = true;
     }

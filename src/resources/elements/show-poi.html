@@ -44,9 +44,11 @@
             </table>
           </div>
           <br>
-          <form if.bind="editable" action="/updatepoi/${poi._id}/update" method="GET">
-            <button class="ui blue submit button">Edit POI</button>
-          </form>
+          <div if.bind="editable">
+            <a route-href="route: poi-update; params.bind: { id: poi._id }">
+              <button class="ui blue submit button">Edit POI</button>
+            </a>
+          </div>
         </div>
       </div>
       <aside class="ui ten wide column">
