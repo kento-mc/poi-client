@@ -44,18 +44,9 @@
             </table>
           </div>
           <br>
-          {{#unless user.isAdmin}}
-          {{#ifEquals compare}}
-          <form action="/updatepoi/{{poi._id}}" method="GET">
+          <form if.bind="editable" action="/updatepoi/${poi._id}/update" method="GET">
             <button class="ui blue submit button">Edit POI</button>
           </form>
-          {{/ifEquals}}
-          {{/unless}}
-          {{#if user.isAdmin}}
-          <form action="/updatepoi/{{poi._id}}" method="GET">
-            <button class="ui blue submit button">Edit POI</button>
-          </form>
-          {{/if}}
         </div>
       </div>
       <aside class="ui ten wide column">

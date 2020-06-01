@@ -103,6 +103,7 @@ export class PoiService {
       imageURL: rawPOI.imageURL,
       thumbnailURL: rawPOI.thumbnailURL,
       contributor: user,
+      _id: rawPOI._id
     }
     return poi;
   }

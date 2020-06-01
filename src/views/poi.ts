@@ -11,6 +11,7 @@ export class Poi {
   id: string;
 
   constructor(private ps: PoiService) {
+    this.user = ps.loggedInUser
     this.pois = ps.pois;
     this.categories = ps.categories;
     this.usercustomcats = ps.userCustomCats;
