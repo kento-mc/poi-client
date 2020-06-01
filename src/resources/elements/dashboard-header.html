@@ -1,25 +1,19 @@
 <template>
   <div class="ui segment">
     <div class="ui grid">
-      {{#if user.isAdmin}}
-      <h1 class="ten wide column">
-        {{user.firstName}} {{user.lastName}}'s Admin Dashboard
+      <h1 if.bind="user.isAdmin" class="ten wide column">
+        ${user.fullName}'s Admin Dashboard
       </h1>
-      {{else}}
-      <h1 class="six wide column">
-        {{user.firstName}} {{user.lastName}}'s Dashboard
+      <h1 else class="six wide column">
+        ${user.fullName}'s Dashboard
       </h1>
-      {{/if}}
-      {{#if user.isAdmin}}
-      <aside class="six wide column">
+      <aside if.bind="user.isAdmin" class="six wide column">
       </aside>
-      {{else}}
-      <aside class="ten wide column">
+      <aside else class="ten wide column">
         <h1>
-          POIs : {{user.contributedPOIs}}
+          POIs : ${user.contributedPOIs}
         </h1>
       </aside>
-      {{/if}}
     </div>
   </div>
 </template>
