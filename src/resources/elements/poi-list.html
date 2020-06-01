@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr repeat.for="poi of poisextended">
+        <tr repeat.for="poi of pois">
           <td>
             <div>${poi.name}</div>
             <a route-href="route: poi; params.bind: { id: poi.name }">
@@ -25,11 +25,13 @@
             <div>Lon: ${poi.location.lon}</div>
           </td>
           <td>
-            <div repeat.for="category of poi.categoryNames">
-              ${category}
+            <div repeat.for="category of poi.categories">
+              ${category.name}
             </div>
           </td>
-          <td> ${poi.contributorName} </td>
+          <td>
+            ${poi.contributor.fullName}
+          </td>
           <td>
             <a href=${poi.thumbnailURL}>
               <img alt="poi thumbnail" src=${poi.thumbnailURL} width="150" height="70">

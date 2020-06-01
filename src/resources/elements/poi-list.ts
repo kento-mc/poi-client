@@ -8,8 +8,8 @@ export class PoiList {
   user: User;
   @bindable
   pois: POI[];
-  @bindable
-  poisextended: any[];
+/*  @bindable
+  poisextended: any[];*/
   @bindable
   categories: Category[];
 }

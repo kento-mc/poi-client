@@ -19,16 +19,23 @@ export interface POI {
     lat: number,
     lon: number,
   }
-  categories: string[],
+  categories: Category[],
   imageURL: string[],
   thumbnailURL: string,
+  contributor: User,
+}
+
+export interface RawCategory {
+  name: string,
+  description: string,
   contributor: string,
+  _id: string
 }
 
 export interface Category {
   name: string,
   description: string,
-  contributor: string,
+  contributor: User,
   _id: string
 }
 
