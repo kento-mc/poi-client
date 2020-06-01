@@ -9,6 +9,7 @@ import { CategoryList } from "../resources/elements/category-list";
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class PoiService {
   users: Map<string, User> = new Map();
+  usersById: Map<string, User> = new Map();
   loggedInUser: User;
   pois: POI[] = [];
   categories: Category[] = [];
@@ -28,14 +29,18 @@ export class PoiService {
     cloudClient.configure(http => {
       http.withBaseUrl('https://api.cloudinary.com/v1_1/dwgak0rbs');
     });
-    const imageFile = file;
+
     const formData = new FormData();
-    formData.append('file', imageFile);
+    formData.append('file', file);
     formData.append('upload_preset', 'asbqtcgx');
 
-    const response = await cloudClient.post('/image/upload', formData);
-    console.log(response.content);
-    return response.content;
+    try {
+      const response = await cloudClient.post('/image/upload', formData);
+      console.log(response.content);
+      return response.content;
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   async addPOI(name: string, description: string, lat: number, lon: number, selectedCategories: string[], imageURL: string[]) {
@@ -81,6 +86,7 @@ export class PoiService {
     const users = await response.content;
     users.forEach(user => {
       this.users.set(user.email, user);
+      this.usersById.set(user._id, user);
     });
     console.log(this.users);
   }
@@ -165,8 +171,19 @@ export class PoiService {
     this.userCategories = this.categories.concat(userCats);
   }
 
-  signup(firstName: string, lastName: string, email: string, password: string) {
-    //this.changeRouter(PLATFORM.moduleName('app'));
+  async signup(firstName: string, lastName: string, email: string, password: string) {
+    const user = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    };
+    const response = await this.httpClient.post('/api/users', user);
+    const newUser: User = await response.content;
+    this.users.set(newUser.email, newUser);
+    this.usersById.set(newUser._id, newUser);
+    this.loggedInUser = newUser;
+    this.changeRouter(PLATFORM.moduleName('app'))
     return false;
   }
 
