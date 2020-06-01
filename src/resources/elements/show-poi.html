@@ -26,7 +26,7 @@
           </div>
           <div class="field">
             <label>Contributor</label>
-            <input class="ui transparent input" value="${poi.contributor} ${poi.contributor}" type="text" name="contributor" readonly>
+            <input class="ui transparent input" value="${poi.contributor.fullName}" type="text" name="contributor" readonly>
           </div>
           <br>
           <div class="field">
@@ -35,9 +35,9 @@
               <thead>
               </thead>
               <tbody>
-                <tr repeat.for="category of poi.categories">
+                <tr repeat.for="category of usercustomcats">
                   <td>
-                    <div>${category}</div>
+                    <div>${category.name}</div>
                   </td>
                 </tr>
               </tbody>

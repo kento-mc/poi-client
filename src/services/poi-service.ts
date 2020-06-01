@@ -14,6 +14,7 @@ export class PoiService {
   pois: POI[] = [];
   categories: Category[] = [];
   userCategories: Category[] = [];
+  userCustomCats: Category[] = [];
 
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
     httpClient.configure(http => {
@@ -81,6 +82,31 @@ export class PoiService {
     }
   }
 
+  async getPoiById(id: string) {
+    const response = await this.httpClient.get('/api/pois/' + id);
+    const rawPOI: RawPOI = await response.content;
+    const response2 = await this.httpClient.get( '/api/users/' + rawPOI.contributor);
+    const user: User = await response2.content;
+    const cats: Category[] = [];
+    for (let catId of rawPOI.categories) {
+      const cat = await this.getCategoryById(catId)
+      cats.push(cat);
+    }
+    const poi = {
+      name: rawPOI.name,
+      description: rawPOI.description,
+      location: {
+        lat: rawPOI.location.lat,
+        lon: rawPOI.location.lon,
+      },
+      categories: cats,
+      imageURL: rawPOI.imageURL,
+      thumbnailURL: rawPOI.thumbnailURL,
+      contributor: user,
+    }
+    return poi;
+  }
+
   async getUsers() {
     const response = await this.httpClient.get('/api/users');
     const users = await response.content;
@@ -102,7 +128,7 @@ export class PoiService {
         const cat = await this.getCategoryById(catId)
         cats.push(cat);
       }
-      const poi = {
+      const poi: POI = {
         name: rawPOI.name,
         description: rawPOI.description,
         location: {
@@ -113,6 +139,7 @@ export class PoiService {
         imageURL: rawPOI.imageURL,
         thumbnailURL: rawPOI.thumbnailURL,
         contributor: user,
+        _id: rawPOI._id
       }
       this.pois.push(poi)
     }
@@ -168,6 +195,7 @@ export class PoiService {
       }
       userCats.push(category)
     });
+    this.userCustomCats = [...userCats];
     this.userCategories = this.categories.concat(userCats);
   }
 

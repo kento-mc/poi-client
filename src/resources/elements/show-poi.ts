@@ -11,16 +11,20 @@ export class ShowPoi {
   @bindable
   categories: Category[];
   @bindable
+  usercustomcats: Category[];
+  @bindable
   id: string;
   poi: POI;
 
   constructor(private ps: PoiService) {}
 
   attached() {
-    this.getPoiByName(this.id);
+    //this.getPoiByName(this.id);
+    this.getPoiById(this.id);
   }
 
-  getPoiByName(name: string) {
-    this.poi = this.ps.getPoiByName(name);
+  async getPoiById(id: string) {
+    //this.poi = this.ps.getPoiByName(name);
+    this.poi = await this.ps.getPoiById(id)
   }
 }

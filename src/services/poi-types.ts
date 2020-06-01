@@ -23,6 +23,7 @@ export interface POI {
   imageURL: string[],
   thumbnailURL: string,
   contributor: User,
+  _id: string;
 }
 
 export interface RawCategory {

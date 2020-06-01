@@ -28,6 +28,13 @@ export class App {
         title: 'POIs'
       },
       {
+        route: 'pois/:id/update',
+        name: 'poi-update',
+        moduleId: PLATFORM.moduleName('views/poi-update'),
+        nav: false,
+        title: 'POI Update'
+      },
+      {
         route: 'settings',
         name: 'Settings',
         moduleId: PLATFORM.moduleName('views/settings'),
