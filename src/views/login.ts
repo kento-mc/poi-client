@@ -3,7 +3,7 @@ import { PoiService } from '../services/poi-service';
 
 @inject(PoiService)
 export class Login {
-  email = 'marge@simpson.com';
+  email = 'homer@simpson.com';
   password = 'secret';
   prompt = '';
 
