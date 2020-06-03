@@ -45,4 +45,9 @@ export class UpdatePoi {
     this.poi = await this.ps.updateAndGetPoi(this.id, poiUpdate)
     this.ps.backToPoiView(this.id);
   }
+
+  async deletePoi() {
+    this.ps.deletePoi(this.id)
+    this.ps.backToPoisView();
+  }
 }
