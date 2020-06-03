@@ -25,6 +25,16 @@ export class PoiService {
     this.getCategories();
   }
 
+  async getUsers() {
+    const response = await this.httpClient.get('/api/users');
+    const users = await response.content;
+    users.forEach(user => {
+      this.users.set(user.email, user);
+      this.usersById.set(user._id, user);
+    });
+    console.log(this.users);
+  }
+
   async uploadImage(file) {
     const cloudClient = new HttpClient();
     cloudClient.configure(http => {
@@ -74,13 +84,13 @@ export class PoiService {
     this.loggedInUser.contributedPOIs++;
   }
 
-  getPoiByName(name: string) { //TODO refactor for DB
+/*  getPoiByName(name: string) { //TODO refactor for DB
     for (let poi of this.pois) {
       if (poi.name == name) {
         return poi;
       }
     }
-  }
+  }*/
 
   async getPoiById(id: string) {
     const response = await this.httpClient.get('/api/pois/' + id);
@@ -106,16 +116,6 @@ export class PoiService {
       _id: rawPOI._id
     }
     return poi;
-  }
-
-  async getUsers() {
-    const response = await this.httpClient.get('/api/users');
-    const users = await response.content;
-    users.forEach(user => {
-      this.users.set(user.email, user);
-      this.usersById.set(user._id, user);
-    });
-    console.log(this.users);
   }
 
   async getPOIs() {
@@ -145,6 +145,54 @@ export class PoiService {
       this.pois.push(poi)
     }
     console.log(this.pois);
+  }
+
+  async updateAndGetPoi(id: string, poi: any) {
+    const response1 = await this.httpClient.put( '/api/pois/' + id + '/update', poi);
+    const rawPOI: RawPOI = await response1.content;
+    const cats: Category[] = [];
+    const response2 = await this.httpClient.get( '/api/users/' + rawPOI.contributor);
+    const user: User = await response2.content;
+    for (let catId of rawPOI.categories) {
+      const cat = await this.getCategoryById(catId)
+      cats.push(cat);
+    }
+    const updatedPOI: POI = {
+      name: rawPOI.name,
+      description: rawPOI.description,
+      location: {
+        lat: rawPOI.location.lat,
+        lon: rawPOI.location.lon,
+      },
+      categories: cats,
+      imageURL: rawPOI.imageURL,
+      thumbnailURL: rawPOI.thumbnailURL,
+      contributor: user,
+      _id: rawPOI._id
+    }
+    return updatedPOI;
+  }
+
+  async deletePoi(id: string) {
+    let index: number;
+    for (let i = 0; i < this.pois.length; i++) {
+      if (this.pois[i]._id === id) {
+        index = i;
+      }
+    }
+    const response = await this.httpClient.delete('/api/pois/' + id);
+    if (response.isSuccess) {
+      this.pois.splice(index,1);
+      console.log(this.pois);
+    }
+  }
+
+  backToPoiView(id: string) {
+    this.router.navigate('#/pois/' + id);
+  }
+
+  backToPoisView() {
+    this.router.navigate('#/pois');
   }
 
   async addCategories(name: string, contributor: string) { //TODO
