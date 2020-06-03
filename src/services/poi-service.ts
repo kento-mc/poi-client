@@ -108,6 +108,10 @@ export class PoiService {
     return poi;
   }
 
+  backToPoiView(id: string) {
+    this.router.navigate('#/pois/' + id);
+  }
+
   async getUsers() {
     const response = await this.httpClient.get('/api/users');
     const users = await response.content;
@@ -145,6 +149,32 @@ export class PoiService {
       this.pois.push(poi)
     }
     console.log(this.pois);
+  }
+
+  async updateAndGetPoi(id: string, poi: any) {
+    const response1 = await this.httpClient.put( '/api/pois/' + id + '/update', poi);
+    const rawPOI: RawPOI = await response1.content;
+    const cats: Category[] = [];
+    const response2 = await this.httpClient.get( '/api/users/' + rawPOI.contributor);
+    const user: User = await response2.content;
+    for (let catId of rawPOI.categories) {
+      const cat = await this.getCategoryById(catId)
+      cats.push(cat);
+    }
+    const updatedPOI: POI = {
+      name: rawPOI.name,
+      description: rawPOI.description,
+      location: {
+        lat: rawPOI.location.lat,
+        lon: rawPOI.location.lon,
+      },
+      categories: cats,
+      imageURL: rawPOI.imageURL,
+      thumbnailURL: rawPOI.thumbnailURL,
+      contributor: user,
+      _id: rawPOI._id
+    }
+    return updatedPOI;
   }
 
   async addCategories(name: string, contributor: string) { //TODO

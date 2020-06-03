@@ -3,26 +3,26 @@
     <div class="ui grid">
       <div class="ui eight wide column">
         <div class="ui stacked fluid form segment">
-          <form action="/updatepoi/{{poi._id}}" method="POST">
+          <form submit.trigger="updatePoi()">
             <h3 class="ui header">${poi.name}: Update Info</h3>
             <div class="field">
-              <label>Name</label> <input value="${poi.name}" type="text" name="name">
+              <label>Name</label> <input value.bind="name" placeholder="${poi.name}" type="text" name="name">
             </div>
             <div class="field">
-              <label>Description</label> <input value="${poi.description}" type="text" name="description">
+              <label>Description</label> <input value.bind="description" placeholder="${poi.description}" type="text" name="description">
             </div>
             <div class="two fields">
               <div class="field">
                 <label>Latitude</label>
-                <input value="${poi.location.lat}" type="number" step="0.000001" name="lat">
+                <input value.bind="lat" placeholder="${poi.location.lat}" type="number" step="0.000001" name="lat">
               </div>
               <div class="field">
                 <label>Longitude</label>
-                <input value="${poi.location.lon}" type="number" step="0.000001" name="lon">
+                <input value.bind="lon" placeholder="${poi.location.lon}" type="number" step="0.000001" name="lon">
               </div>
             </div>
             <div class="field">
-              <label>Image URL</label> <input value="${poi.imageURL}" type="text" name="thumbnail">
+              <label>Image URL</label> <input value.bind="thumbnailURL" placeholder="${poi.thumbnailURL}" type="text" name="thumbnail">
             </div>
             <div class="field">
               <label>Contributor</label>
@@ -35,9 +35,9 @@
                 <thead>
                 </thead>
                 <tbody>
-                  <tr repeat.for="cat of usercustomcats">
+                  <tr repeat.for="cat of poi.categories">
                     <td>
-                      <input value="${cat.name}" type="text" name="categories">
+                      <input value="${cat.name}" type="text" name="categories" readonlh>
                     </td>
                   </tr>
                 </tbody>
