@@ -1,4 +1,6 @@
 <template>
+  <require from="./image-gallery"></require>
+
   <section class="ui raised segment">
     <div class="ui grid">
       <div class="ui six wide column">
@@ -56,7 +58,7 @@
           <img src="${poi.thumbnailURL}" class="ui huge image">
         </a>
         <br>
-        {{> imagegallery}}
+        <image-gallery poi.bind="poi"></image-gallery>
       </aside>
     </div>
   </section>

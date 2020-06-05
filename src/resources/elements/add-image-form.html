@@ -1,0 +1,20 @@
+<template>
+  <div class="ui stacked segment">
+    <h4>Add another image</h4>
+    <form submit.trigger="addImage()" enctype="multipart/form-data">
+      <div>
+        <label for="file-upload" class="ui blue button">
+          <i class="image icon"></i>
+          Upload Image
+        </label>
+        <input change.trigger="getImage($event)" id="file-upload" type="file" name="image" style="display:none">
+      </div>
+      <div show.bind="imageName"  class="field" id="upload-preview">
+        <input placeholder=${imageName} readonly>
+      </div>
+      <br hide.bind="imageName">
+      <button class="ui blue submit button">Submit</button>
+    </form>
+  </div>
+</template>
+
