@@ -4,42 +4,40 @@
 
   <scriptinjector></scriptinjector>
 
-  <div class="ui stacked segment">
-    <form submit.trigger="submitPOI()" class="ui form stacked segment" enctype="multipart/form-data">
-      <h3 class="ui header">Add a new Point of Interest</h3>
-      <div class="field"><label>Name</label> <input value.bind="name" placeholder="point of interest" type="text" name="name" /></div>
-      <div class="field"><label>Description</label> <input value.bind="description" placeholder="description" type="text" name="description" /></div>
-      <div class="two fields">
-        <div class="field">
-          <label>Latitude</label>
-          <input value.bind="lat" placeholder="0.000000" type="number" step="0.000001"/>
-        </div>
-        <div class="field">
-          <label>Longitude</label>
-          <input value.bind="lon" placeholder="0.000000" type="number" step="0.000001"/>
-        </div>
+  <form submit.trigger="submitPOI()" class="ui form stacked segment" enctype="multipart/form-data">
+    <h3 class="ui header">Add a new Point of Interest</h3>
+    <div class="field"><label>Name</label> <input value.bind="name" placeholder="point of interest" type="text" name="name" /></div>
+    <div class="field"><label>Description</label> <input value.bind="description" placeholder="description" type="text" name="description" /></div>
+    <div class="two fields">
+      <div class="field">
+        <label>Latitude</label>
+        <input value.bind="lat" placeholder="0.000000" type="number" step="0.000001"/>
       </div>
       <div class="field">
-        <label class="field">Categories</label>
-        <select change.trigger="logChange($event)" class="ui fluid dropdown" multiple value.bind="selectedCategories">
-          <option value="">categories</option>
-          <option id="repeatOption" repeat.for="cat of usercategories" value.bind="cat" value=${cat._id}>
-            ${cat.name}
-          </option>
-        </select>
+        <label>Longitude</label>
+        <input value.bind="lon" placeholder="0.000000" type="number" step="0.000001"/>
       </div>
-      <div>
-        <label for="file-upload" class="ui blue button">
-          <i class="image icon"></i>
-          Upload Image
-        </label>
-        <input change.trigger="getImage($event)" id="file-upload" type="file" name="image" style="display:none">
-      </div>
-      <div show.bind="imageName" class="field" id="upload-preview">
-        <input placeholder=${imageName} readonly>
-      </div>
-      <br hide.bind="imageName">
-      <button class="ui blue submit button">Submit</button>
-    </form>
-  </div>
+    </div>
+    <div class="field">
+      <label class="field">Categories</label>
+      <select change.trigger="logChange($event)" class="ui fluid dropdown" multiple value.bind="selectedCategories">
+        <option value="">categories</option>
+        <option id="repeatOption" repeat.for="cat of usercategories" value.bind="cat" value=${cat._id}>
+          ${cat.name}
+        </option>
+      </select>
+    </div>
+    <div>
+      <label for="file-upload" class="ui blue button">
+        <i class="image icon"></i>
+        Upload Image
+      </label>
+      <input change.trigger="getImage($event)" id="file-upload" type="file" name="image" style="display:none">
+    </div>
+    <div show.bind="imageName" class="field" id="upload-preview">
+      <input placeholder=${imageName} readonly>
+    </div>
+    <br hide.bind="imageName">
+    <button class="ui blue submit button">Submit</button>
+  </form>
 </template>

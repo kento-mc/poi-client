@@ -249,6 +249,19 @@ export class PoiService {
     this.userCategories = this.categories.concat(userCats);
   }
 
+  async addCategory(id: string, cat: any) {
+    const response = await this.httpClient.post('/api/users/' + this.loggedInUser._id + '/categories', cat);
+    const rawUserCat: RawCategory = await response.content;
+    const category = {
+      name: rawUserCat.name,
+      description: rawUserCat.description,
+      contributor: this.loggedInUser,
+      _id: rawUserCat._id
+    }
+    this.userCustomCats.push(category);
+    await this.getUserCategories();
+  }
+
   async signup(firstName: string, lastName: string, email: string, password: string) {
     const user = {
       firstName: firstName,

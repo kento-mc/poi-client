@@ -2,6 +2,7 @@
   <require from="../resources/elements/dashboard-header"></require>
   <require from="../resources/elements/add-poi-form"></require>
   <require from="../resources/elements/poi-list"></require>
+  <require from="../resources/elements/add-category"></require>
 
   <div class="ui stackable grid">
     <div class="sixteen wide column">
@@ -9,6 +10,8 @@
     </div>
     <div class="six wide column">
       <add-poi-form user.bind="user" categories.bind="categories" usercategories.bind="usercategories"></add-poi-form>
+      <br>
+      <add-category user.bind="user" usercustomcats.bind="usercustomcats"></add-category>
     </div>
     <div class="ten wide column">
       <poi-list user.bind="user" pois.bind="pois"></poi-list>

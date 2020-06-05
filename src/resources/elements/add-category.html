@@ -1,0 +1,26 @@
+<template>
+  <div class="ui raised segment">
+    <form submit.trigger="addCategory()">
+      <h4 class="ui header">${user.firstName}'s Custom Categories</h4>
+      <table class="ui celled table segment">
+        <tbody>
+        <tr>
+          <td>
+            <div class="field">
+              <input value.bind="cat" placeholder="add new category" type="text" name="name" />
+            </div>
+          </td>
+          <td>
+            <button class="ui blue submit button"> + </button>
+          </td>
+        </tr>
+        <tr repeat.for="cat of usercustomcats">
+          <td colspan="2">
+            ${cat.name}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</template>
