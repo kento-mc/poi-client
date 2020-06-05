@@ -1,0 +1,9 @@
+<template>
+  <div class="ui three stackable cards">
+    <div repeat.for="image of poi.imageURL" class="card">
+      <a class="image" href="${image}">
+        <img src="${image}" class="hoverZoomLink">
+      </a>
+    </div>
+  </div>
+</template>

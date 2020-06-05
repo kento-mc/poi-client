@@ -1,4 +1,7 @@
 <template>
+  <require from="./image-gallery"></require>
+  <require from="./add-image-form"></require>
+
   <section class="ui raised segment">
     <div class="ui grid">
       <div class="ui eight wide column">
@@ -53,8 +56,9 @@
           <img src="${poi.thumbnailURL}" class="ui huge image">
         </a>
         <br>
-        {{> imagegallery}}
-        {{> addimageform}}
+        <image-gallery poi.bind="poi"></image-gallery>
+        <br>
+        <add-image-form poi.bind="poi"></add-image-form>
       </aside>
     </div>
   </section>

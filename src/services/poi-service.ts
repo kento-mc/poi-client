@@ -147,7 +147,7 @@ export class PoiService {
     console.log(this.pois);
   }
 
-  async updateAndGetPoi(id: string, poi: any) {
+  async updateAndGetPoi(id: string, poi: any, newImage: string) {
     const response1 = await this.httpClient.put( '/api/pois/' + id + '/update', poi);
     const rawPOI: RawPOI = await response1.content;
     const cats: Category[] = [];
@@ -157,6 +157,10 @@ export class PoiService {
       const cat = await this.getCategoryById(catId)
       cats.push(cat);
     }
+/*    const imageURL = [...rawPOI.imageURL];
+    if (newImage) {
+      imageURL.push(newImage);
+    }*/
     const updatedPOI: POI = {
       name: rawPOI.name,
       description: rawPOI.description,

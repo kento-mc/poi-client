@@ -7,15 +7,10 @@ import {PoiService} from "../../services/poi-service";
 export class UpdatePoi {
   @bindable
   user: User;
-  /*  @bindable
-    pois: POI[];
-    @bindable
-    categories: Category[];
-  @bindable
-  usercustomcats: Category[];*/
   @bindable
   id: string;
   poi: POI;
+  newImage: string = '';
 
   name: string;
   description: string;
@@ -32,6 +27,7 @@ export class UpdatePoi {
 
   async getPoiById(id: string) {
     this.poi = await this.ps.getPoiById(id)
+    console.log(this.poi);
   }
 
   async updatePoi() {
@@ -42,7 +38,7 @@ export class UpdatePoi {
       lon: (typeof this.lon === 'undefined') ? this.poi.location.lon : this.lon,
       thumbnailURL: (typeof this.thumbnailURL === 'undefined') ? this.poi.thumbnailURL : this.thumbnailURL
     }
-    this.poi = await this.ps.updateAndGetPoi(this.id, poiUpdate)
+    this.poi = await this.ps.updateAndGetPoi(this.id, poiUpdate, this.newImage)
     this.ps.backToPoiView(this.id);
   }
 
