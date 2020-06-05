@@ -157,10 +157,7 @@ export class PoiService {
       const cat = await this.getCategoryById(catId)
       cats.push(cat);
     }
-/*    const imageURL = [...rawPOI.imageURL];
-    if (newImage) {
-      imageURL.push(newImage);
-    }*/
+
     const updatedPOI: POI = {
       name: rawPOI.name,
       description: rawPOI.description,

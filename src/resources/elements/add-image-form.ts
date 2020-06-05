@@ -27,7 +27,6 @@ export class AddImageForm {
     this.newImage = this.imageInfo.url;
     this.newURLs = [...this.poi.imageURL]
     this.newURLs.push(this.newImage);
-    //this.poi.imageURL.push(this.imageInfo.url);
 
     const poiUpdate = {
       name: this.poi.name,
