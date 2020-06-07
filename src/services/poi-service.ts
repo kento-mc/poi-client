@@ -15,6 +15,7 @@ export class PoiService {
   categories: Category[] = [];
   userCategories: Category[] = [];
   userCustomCats: Category[] = [];
+  urlPairs: any[] = [];
 
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
     httpClient.configure(http => {
@@ -250,6 +251,16 @@ export class PoiService {
     }
     this.userCustomCats.push(category);
     await this.getUserCategories();
+  }
+
+  async swapURL(url: string) {
+    let swappedURL
+    this.urlPairs.forEach(pair => {
+      if (url === pair.cleanURL) {
+        swappedURL = pair.url;
+      }
+    });
+    return swappedURL;
   }
 
   async signup(firstName: string, lastName: string, email: string, password: string) {

@@ -35,6 +35,13 @@ export class App {
         title: 'POI Update'
       },
       {
+        route: 'pois/:id/image/:image',
+        name: 'poi-image',
+        moduleId: PLATFORM.moduleName('views/poi-image'),
+        nav: false,
+        title: 'POI Image'
+      },
+      {
         route: 'settings',
         name: 'Settings',
         moduleId: PLATFORM.moduleName('views/settings'),

@@ -1,5 +1,6 @@
 <template>
   <require from="./image-gallery"></require>
+  <require from="./simple-map"></require>
 
   <section class="ui raised segment">
     <div class="ui grid">
@@ -54,11 +55,9 @@
         </div>
       </div>
       <aside class="ui ten wide column">
-        <a href="${poi.thumbnailURL}">
-          <img src="${poi.thumbnailURL}" class="ui huge image">
-        </a>
+        <simple-map></simple-map>
         <br>
-        <image-gallery poi.bind="poi"></image-gallery>
+        <image-gallery id.bind="id" poi.bind="poi"></image-gallery>
       </aside>
     </div>
   </section>

@@ -1,8 +1,13 @@
 <template>
   <div class="ui three stackable cards">
-    <div repeat.for="image of poi.imageURL" class="card">
-      <a class="image" href="${image}">
+    <div repeat.for="image of cleanURLs" class="card">
+      <!--<a class="image" href="${image}">
         <img src="${image}" class="hoverZoomLink">
+      </a>-->
+      <a class="image" route-href="route:
+        poi-image;
+        params.bind: { id: poi._id, image: image.cleanURL }">
+        <img src="${image.url}" class="hoverZoomLink">
       </a>
     </div>
   </div>
