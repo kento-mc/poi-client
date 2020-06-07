@@ -1,0 +1,65 @@
+<template>
+  <require from="./image-gallery"></require>
+
+  <section class="ui raised segment">
+    <div class="ui grid">
+      <div class="ui six wide column">
+        <div class="ui stacked fluid form segment">
+          <h3 class="ui header">${poi.name}</h3>
+          <div class="field">
+            <label>Name</label> <input class="ui transparent input" value="${poi.name}" type="text" name="name" readonly>
+          </div>
+          <div class="field">
+            <label>Description</label> <input class="ui transparent input" value="${poi.description}" type="text" name="description" readonly>
+          </div>
+          <div class="two fields">
+            <div class="field">
+              <label>Latitude</label>
+              <input class="ui transparent input" value="${poi.location.lat}" type="number" name="lat" readonly>
+            </div>
+            <div class="field">
+              <label>Longitude</label>
+              <input class="ui transparent input" value="${poi.location.lon}" type="number" name="lon" readonly>
+            </div>
+          </div>
+          <div class="field">
+            <label>Image URL</label>
+            <input class="ui transparent input" value="${poi.imageURL}" type="text" name="imageURL" readonly>
+          </div>
+          <div class="field">
+            <label>Contributor</label>
+            <input class="ui transparent input" value="${poi.contributor.fullName}" type="text" name="contributor" readonly>
+          </div>
+          <br>
+          <div class="field">
+            <label>Categories</label>
+            <table class="ui celled table segment">
+              <thead>
+              </thead>
+              <tbody>
+                <tr repeat.for="category of poi.categories">
+                  <td>
+                    <div>${category.name}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+          <div if.bind="editable">
+            <a route-href="route: poi-update; params.bind: { id: poi._id }">
+              <button class="ui blue submit button">Edit POI</button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <aside class="ui ten wide column">
+        <a href="${poi.thumbnailURL}">
+          <img src="${poi.thumbnailURL}" class="ui huge image">
+        </a>
+        <br>
+        <image-gallery poi.bind="poi"></image-gallery>
+      </aside>
+    </div>
+  </section>
+</template>

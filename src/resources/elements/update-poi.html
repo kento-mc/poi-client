@@ -1,0 +1,65 @@
+<template>
+  <require from="./image-gallery"></require>
+  <require from="./add-image-form"></require>
+
+  <section class="ui raised segment">
+    <div class="ui grid">
+      <div class="ui eight wide column">
+        <div class="ui stacked fluid form segment">
+          <form submit.trigger="updatePoi()">
+            <h3 class="ui header">${poi.name}: Update Info</h3>
+            <div class="field">
+              <label>Name</label> <input value.bind="name" placeholder="${poi.name}" type="text" name="name">
+            </div>
+            <div class="field">
+              <label>Description</label> <input value.bind="description" placeholder="${poi.description}" type="text" name="description">
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <label>Latitude</label>
+                <input value.bind="lat" placeholder="${poi.location.lat}" type="number" step="0.000001" name="lat">
+              </div>
+              <div class="field">
+                <label>Longitude</label>
+                <input value.bind="lon" placeholder="${poi.location.lon}" type="number" step="0.000001" name="lon">
+              </div>
+            </div>
+            <div class="field">
+              <label>Image URL</label> <input value.bind="thumbnailURL" placeholder="${poi.thumbnailURL}" type="text" name="thumbnail">
+            </div>
+            <div class="field">
+              <label>Contributor</label>
+              <input class="ui transparent input" value="${poi.contributor.fullName}" type="text" name="contributor" readonly>
+            </div>
+            <br>
+            <div class="field">
+              <label>Categories</label>
+              <table class="ui celled table segment">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr repeat.for="cat of poi.categories">
+                    <td>
+                      <input value="${cat.name}" type="text" name="categories" readonlh>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button class="ui blue submit button">Save Changes</button>
+            <button click.trigger="deletePoi()" class="ui red submit button">Delete POI</button>
+          </form>
+        </div>
+      </div>
+      <aside class="ui eight wide column">
+        <a href="${poi.thumbnailURL}">
+          <img src="${poi.thumbnailURL}" class="ui huge image">
+        </a>
+        <br>
+        <image-gallery poi.bind="poi"></image-gallery>
+        <br>
+        <add-image-form poi.bind="poi"></add-image-form>
+      </aside>
+    </div>
+  </section>
+</template>
