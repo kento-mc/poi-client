@@ -14,7 +14,8 @@
     "blueimp-file-upload": "^10.29.0",
     "cloudinary": "^1.21.0",
     "cloudinary-jquery-file-upload": "^2.8.2",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "leaflet": "^1.6.0"
   },
   "devDependencies": {
     "@types/jest": "^25.1.3",
