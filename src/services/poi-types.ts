@@ -66,5 +66,5 @@ export interface User {
 
 export interface Location {
   lat: number;
-  lng: number;
+  lon: number;
 }

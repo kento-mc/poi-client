@@ -5,6 +5,7 @@ import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { RawPOI, POI, Category, User, RawCategory } from "./poi-types";
 import { CategoryList } from "../resources/elements/category-list";
+import {PoiLocation} from "./messages";
 
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class PoiService {
@@ -177,6 +178,10 @@ export class PoiService {
       console.log(this.pois);
     }
   }
+
+/*  async locatePOI(poi: POI) {
+    this.ea.publish(new PoiLocation(poi));
+  }*/
 
   backToPoiView(id: string) {
     this.router.navigate('#/pois/' + id);

@@ -33,7 +33,7 @@ export class LeafletMap {
       defaultLayer = this.baseLayers[activeLayer];
     }
     this.imap = L.map(id, {
-      center: [descriptor.location.lat, descriptor.location.lng],
+      center: [descriptor.location.lat, descriptor.location.lon],
       zoom: descriptor.zoom,
       minZoom: descriptor.minZoom,
       zoomControl: false,
@@ -65,16 +65,16 @@ export class LeafletMap {
 
   moveTo(zoom: number, location: Location) {
     this.imap.setZoom(zoom);
-    this.imap.panTo(new L.LatLng(location.lat, location.lng));
+    this.imap.panTo(new L.LatLng(location.lat, location.lon));
   }
 
   zoomTo(location: Location) {
-    this.imap.setView(new L.LatLng(location.lat, location.lng), 8);
+    this.imap.setView(new L.LatLng(location.lat, location.lon), 8);
   }
 
   addMarker(location: Location, popupText = '', layerTitle = 'default') {
     let group: LayerGroup;
-    let marker = L.marker([location.lat, location.lng]);
+    let marker = L.marker([location.lat, location.lon]);
     if (popupText) {
       var popup = L.popup({ autoClose: false, closeOnClick: false });
       popup.setContent(popupText);
