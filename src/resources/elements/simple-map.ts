@@ -39,7 +39,8 @@ export class SimpleMap {
       minZoom: 7,
     };
     this.map = new LeafletMap(this.mapId, mapConfig, 'Terrain');
-    this.map.addMarker(this.poi.location);
+    const poiStr = `${this.poi.name}`;
+    this.map.addMarker(this.poi.location, poiStr);
     //this.renderPoi(this.poi);
   }
 }
