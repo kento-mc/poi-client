@@ -9,6 +9,7 @@ export class Dashboard {
   categories: Category[];
   usercategories: Category[];
   usercustomcats: Category[];
+  userpois: POI[];
 
   constructor(private ps: PoiService) {
     this.user = ps.loggedInUser;
@@ -16,5 +17,6 @@ export class Dashboard {
     this.categories = ps.categories;
     this.usercategories = ps.userCategories;
     this.usercustomcats = ps.userCustomCats;
+    this.userpois = ps.userPois;
   }
 }

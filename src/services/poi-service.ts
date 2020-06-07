@@ -13,6 +13,7 @@ export class PoiService {
   usersById: Map<string, User> = new Map();
   loggedInUser: User;
   pois: POI[] = [];
+  userPois: POI[] = [];
   categories: Category[] = [];
   userCategories: Category[] = [];
   userCustomCats: Category[] = [];
@@ -137,6 +138,14 @@ export class PoiService {
       this.pois.push(poi)
     }
     console.log(this.pois);
+  }
+
+  async getUserPOIs (id: string) {
+    this.pois.forEach(poi => {
+      if (poi._id === this.loggedInUser._id) {
+        this.userpois.push(poi);
+      }
+    });
   }
 
   async updateAndGetPoi(id: string, poi: any, newImage: string) {
@@ -302,6 +311,7 @@ export class PoiService {
         const user = this.users.get(email);
         this.loggedInUser = user;
         await this.getPOIs();
+        await this.getUserPOIs(this.loggedInUser._id);
         await this.getCategories();
         await this.getUserCategories();
         this.changeRouter(PLATFORM.moduleName('app'))
