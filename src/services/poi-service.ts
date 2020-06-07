@@ -143,7 +143,7 @@ export class PoiService {
   async getUserPOIs (id: string) {
     this.pois.forEach(poi => {
       if (poi._id === this.loggedInUser._id) {
-        this.userpois.push(poi);
+        this.userPois.push(poi);
       }
     });
   }
