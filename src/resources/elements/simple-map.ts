@@ -36,11 +36,12 @@ export class SimpleMap {
     const mapConfig = {
       location: this.poi.location,
       zoom: 8,
-      minZoom: 7,
+      minZoom: 1,
     };
     this.map = new LeafletMap(this.mapId, mapConfig, 'Terrain');
     const poiStr = `${this.poi.name}`;
     this.map.addMarker(this.poi.location, poiStr);
+    this.map.showZoomControl();
     //this.renderPoi(this.poi);
   }
 }
