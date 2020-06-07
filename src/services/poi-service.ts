@@ -81,14 +81,6 @@ export class PoiService {
     this.loggedInUser.contributedPOIs++;
   }
 
-/*  getPoiByName(name: string) { //TODO refactor for DB
-    for (let poi of this.pois) {
-      if (poi.name == name) {
-        return poi;
-      }
-    }
-  }*/
-
   async getPoiById(id: string) {
     const response = await this.httpClient.get('/api/pois/' + id);
     const rawPOI: RawPOI = await response.content;
@@ -276,8 +268,6 @@ export class PoiService {
     this.users.set(newUser.email, newUser);
     this.usersById.set(newUser._id, newUser);
     await this.login(email, password);
-/*    this.loggedInUser = newUser;
-    this.changeRouter(PLATFORM.moduleName('app'))*/
     return false;
   }
 
