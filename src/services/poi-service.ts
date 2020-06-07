@@ -20,9 +20,6 @@ export class PoiService {
     httpClient.configure(http => {
       http.withBaseUrl('http://localhost:3000');
     });
-    this.getUsers();
-    this.getPOIs();
-    this.getCategories();
   }
 
   async getUsers() {
@@ -233,6 +230,7 @@ export class PoiService {
   }
 
   async getUserCategories() {
+    this.userCategories = [];
     const userCats: Category[] = [];
     const response = await this.httpClient.get('/api/users/' + this.loggedInUser._id + '/categories');
     const rawUserCats: RawCategory[] = await response.content;
@@ -271,28 +269,62 @@ export class PoiService {
     };
     const response = await this.httpClient.post('/api/users', user);
     const newUser: User = await response.content;
+    newUser.fullName = newUser.firstName + ' ' + newUser.lastName;
+    newUser.isAdmin = false;
+    newUser.customCategories = 0,
+    newUser.contributedPOIs = 0,
     this.users.set(newUser.email, newUser);
     this.usersById.set(newUser._id, newUser);
-    this.loggedInUser = newUser;
-    this.changeRouter(PLATFORM.moduleName('app'))
+    await this.login(email, password);
+/*    this.loggedInUser = newUser;
+    this.changeRouter(PLATFORM.moduleName('app'))*/
     return false;
   }
 
   async login(email: string, password: string) {
-    const user = this.users.get(email);
-    if (user && (user.password === password)) {
-      this.loggedInUser = user;
-      await this.getUserCategories();
-      this.changeRouter(PLATFORM.moduleName('app'))
-      return true;
-    } else {
-      return false;
+    let success = false;
+    try {
+      const response = await this.httpClient.post('/api/users/authenticate', { email: email, password: password });
+      const status = await response.content;
+      if (status.success) {
+        this.httpClient.configure((configuration) => {
+          configuration.withHeader('Authorization', 'bearer ' + status.token);
+        });
+        localStorage.poi = JSON.stringify(response.content);
+        await this.getUsers();
+        const user = this.users.get(email);
+        this.loggedInUser = user;
+        await this.getPOIs();
+        await this.getCategories();
+        await this.getUserCategories();
+        this.changeRouter(PLATFORM.moduleName('app'))
+        success = status.success;
+      }
+    } catch (e) {
+      success = false;
+    }
+    return success;
+  }
+
+  checkIsAuthenticated() {
+    let authenticated = false;
+    if (localStorage.donation !== 'null') {
+      authenticated = true;
+      this.httpClient.configure(http => {
+        const auth = JSON.parse(localStorage.poi);
+        http.withHeader('Authorization', 'bearer ' + auth.token);
+      });
+      this.changeRouter(PLATFORM.moduleName('app'));
     }
   }
 
   logout() {
+    localStorage.poi = null;
+    this.httpClient.configure(configuration => {
+      configuration.withHeader('Authorization', '');
+    });
     this.loggedInUser = null;
-    this.changeRouter(PLATFORM.moduleName('start'))
+    this.changeRouter(PLATFORM.moduleName('start'));
   }
 
   changeRouter(module: string) {

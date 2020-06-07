@@ -20,7 +20,7 @@
     </div>
     <div class="field">
       <label class="field">Categories</label>
-      <select change.trigger="logChange($event)" class="ui fluid dropdown" multiple value.bind="selectedCategories">
+      <select class="ui fluid dropdown" multiple value.bind="selectedCategories">
         <option value="">categories</option>
         <option id="repeatOption" repeat.for="cat of usercategories" value.bind="cat" value=${cat._id}>
           ${cat.name}
