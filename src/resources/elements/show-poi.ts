@@ -1,8 +1,10 @@
 import {bindable, inject} from 'aurelia-framework';
 import {POI, Category, User} from '../../services/poi-types';
 import {PoiService} from "../../services/poi-service";
+import { EventAggregator } from 'aurelia-event-aggregator';
+import {PoiLocation} from "../../services/messages";
 
-@inject(PoiService)
+@inject(PoiService, EventAggregator)
 export class ShowPoi {
   @bindable
   user: User;
@@ -17,7 +19,7 @@ export class ShowPoi {
   poi: POI;
   editable: boolean = false;
 
-  constructor(private ps: PoiService) {}
+  constructor(private ps: PoiService, private ea: EventAggregator) {}
 
   async attached() {
     await this.getPoiById(this.id);
@@ -26,6 +28,12 @@ export class ShowPoi {
 
   async getPoiById(id: string) {
     this.poi = await this.ps.getPoiById(id)
+    //this.locatePOI(this.poi);
+  }
+
+  async locatePOI(poi: POI) {
+    this.ea.publish(new PoiLocation(poi));
+    //this.ps.locatePOI(poi);
   }
 
   isEditable(poi: POI, user: User) {

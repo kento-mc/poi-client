@@ -63,3 +63,8 @@ export interface User {
   contributedPOIs: number,
   _id: string
 }
+
+export interface Location {
+  lat: number;
+  lon: number;
+}
