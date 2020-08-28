@@ -1,7 +1,5 @@
 # `poi-client`
 
-Released v0.1.0
+### API server and web interface: https://enigmatic-lowlands-42374.herokuapp.com/
+### Aurelia Client app: https://sharp-hopper-8e821c.netlify.app/
 
-Basic functionality of server-rendered app duplicated. Still some outstanding bugs.
-
-Added Leaflet map functionality.
